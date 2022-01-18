@@ -11,15 +11,27 @@ namespace Larab5.Objects
     class Player : BaseObject
     {
         public Action<Marker> onMarkerOverlap;
+        public Action<MyTarget> OnTargetOverlap; ///
+        public float vX, vY;
+
         //конструктор
-        public Player (float x, float y, float angle) : base(x, y, angle)
+        public Player(float x, float y) : base(x, y)
         {
         }
+        public void DrawIcon(System.Drawing.Icon icon, int x, int y)
+        {
+            Icon newIcon = new Icon("SampIcon.ico");
+        }
+        
         public override void Render(Graphics g)
         {
             g.FillEllipse(new SolidBrush(Color.DeepSkyBlue), -15, -15, 30, 30);//заливка
             g.DrawEllipse(new Pen(Color.Black, 2), -15, -15, 30, 30);//рамка
-            g.DrawLine(new Pen(Color.Black, 2), 0, 0, 25, 0);//указатель направления
+            //крест на гг
+            g.DrawLine(new Pen(Color.Black, 2), 0, 0, 11, -11);
+            g.DrawLine(new Pen(Color.Black, 2), 0, 0, 11, 11);
+            g.DrawLine(new Pen(Color.Black, 2), 0, 0, -11, 11);
+            g.DrawLine(new Pen(Color.Black, 2), 0, 0, -11, -11);
         }
         public override GraphicsPath GetGraphicsPath()
         {

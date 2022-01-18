@@ -10,7 +10,7 @@ namespace Larab5.Objects
     class MyTarget : BaseObject
     {
         //конструктор
-        public MyTarget(float x, float y, float angle) : base(x, y, angle)
+        public MyTarget(float x, float y) : base(x, y)
         {
         }
 

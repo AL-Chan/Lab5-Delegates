@@ -12,15 +12,14 @@ namespace Larab5.Objects
     {
         // точки расположения в виде координат X и Y и угол поворота
         public float X, Y;
-        public float Angle;
+        //public float Angle;
 
         public Action<BaseObject, BaseObject> onOverlap; //реакция на события
 
-        public BaseObject(float x, float y, float angle)
+        public BaseObject(float x, float y)
         {
             X = x;
             Y = y;
-            Angle = angle;
         }
 
         //сдвигание с помощью матрицы трансформаций

@@ -12,7 +12,7 @@ namespace Larab5.Objects
     class Marker : BaseObject
     {
         //конструктор
-        public Marker (float x, float y, float angle) : base(x, y, angle)
+        public Marker (float x, float y) : base(x, y)
         {
 
         }

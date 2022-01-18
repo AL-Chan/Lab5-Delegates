@@ -1,12 +1,8 @@
 ﻿using Larab5.Objects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Larab5
@@ -17,11 +13,12 @@ namespace Larab5
         List<BaseObject> objects = new List<BaseObject>();
         Player player;// поле для игрока
         Marker marker;
-        
+        float X, Y;
+
         public Form1()
         {
             InitializeComponent();
-            player = new Player(Mainframe.Width / 2, Mainframe.Height / 2, 0);
+            player = new Player(Mainframe.Width / 2, Mainframe.Height / 2);
             //реакция на пересечение
             player.onOverlap += (p, obj) =>
             {
@@ -33,18 +30,20 @@ namespace Larab5
                 objects.Remove(m);
                 marker = null;
             };
-            marker = new Marker(Mainframe.Width / 2+40, Mainframe.Height / 2+40, 0);
+            marker = new Marker(Mainframe.Width / 2+40, Mainframe.Height / 2+40);
 
             objects.Add(marker);
             objects.Add(player);
-            objects.Add(new MyTarget(50, 50, 0));
-            objects.Add(new MyTarget(100, 100, 0));
+            objects.Add(new MyTarget(50, 50));
+            objects.Add(new MyTarget(100, 100));
         }
 
         private void Mainframe_Paint(object sender, PaintEventArgs e)
         {
             var g = e.Graphics; 
             g.Clear(Color.White);
+
+            updPlayer(); //вывод отдельного метода под движение
             //пересчет
             foreach (var obj in objects.ToList())
             {
@@ -63,7 +62,7 @@ namespace Larab5
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void updPlayer()
         {
             if (marker != null)
             {
@@ -76,7 +75,25 @@ namespace Larab5
                 dy /= dlina;
                 player.X += dx * 2;
                 player.Y += dy * 2;
+
+                player.vX += dx * 0.45f;
+                player.vY += dy * 0.45f;
+
+                //поворот игрока 
+                //player.Angle = (float)(90 - Math.Atan2(player.vX, player.vY) * 180 / Math.PI);
             }
+
+            // тормозящий момент,постепенное замедление
+            player.vX += -player.vX * 0.12f;
+            player.vY += -player.vY * 0.12f;
+
+            // пересчет позиция игрока с помощью вектора скорости
+            player.X += player.vX;
+            player.Y += player.vY;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
             Mainframe.Invalidate();
         }
 
@@ -84,7 +101,7 @@ namespace Larab5
         {
             if (marker == null)
             {
-                marker = new Marker(0, 0, 0);
+                marker = new Marker(0, 0);
                 objects.Add(marker);
             }
 
