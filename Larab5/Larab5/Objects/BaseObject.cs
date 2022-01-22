@@ -21,6 +21,12 @@ namespace Larab5.Objects
             X = x;
             Y = y;
         }
+        public virtual void GenerateRandomly(int maxX, int maxY)
+        { // рандомное задавание позиции
+            Random random = new Random();
+            X = random.Next(10, maxX - 10);
+            Y = random.Next(10, maxY - 10);
+        }
 
         //сдвигание с помощью матрицы трансформаций
         public Matrix GetTransform()
@@ -32,7 +38,7 @@ namespace Larab5.Objects
         }
 
         public virtual void Render(Graphics g)
-        {}
+        { }
 
         public virtual GraphicsPath GetGraphicsPath()
         {
@@ -60,5 +66,6 @@ namespace Larab5.Objects
                 this.onOverlap(this, obj);
             }
         }
+        
     }
 }

@@ -10,15 +10,20 @@ namespace Larab5
     public partial class Form1 : Form
     {
         //MyTarget myEnemy;// поле для вражин
+        int schet = 0;
         List<BaseObject> objects = new List<BaseObject>();
         Player player;// поле для игрока
+        MyTarget target1 = new MyTarget(0, 0);
+        MyTarget target2 = new MyTarget(0, 0);
         Marker marker;
-        float X, Y;
+        //float X, Y;
 
         public Form1()
         {
             InitializeComponent();
             player = new Player(Mainframe.Width / 2, Mainframe.Height / 2);
+            target1.GenerateRandomly(Mainframe.Width/2, Mainframe.Height/2);
+            target2.GenerateRandomly(Mainframe.Width, Mainframe.Height);
             //реакция на пересечение
             player.onOverlap += (p, obj) =>
             {
@@ -30,12 +35,18 @@ namespace Larab5
                 objects.Remove(m);
                 marker = null;
             };
-            marker = new Marker(Mainframe.Width / 2+40, Mainframe.Height / 2+40);
+            ///
+            player.OnTargetOverlap = (t) => {
+                schet++;
+                t.GenerateRandomly(Mainframe.Width, Mainframe.Height);
+            };
+
+            marker = new Marker(Mainframe.Width / 2+5, Mainframe.Height / 2+5);
 
             objects.Add(marker);
             objects.Add(player);
-            objects.Add(new MyTarget(50, 50));
-            objects.Add(new MyTarget(100, 100));
+            objects.Add(target1);
+            objects.Add(target2);
         }
 
         private void Mainframe_Paint(object sender, PaintEventArgs e)
@@ -60,6 +71,7 @@ namespace Larab5
                 g.Transform = obj.GetTransform();
                 obj.Render(g);
             }
+            ScoreCount.Text = $"Счёт: {schet}";
         }
 
         private void updPlayer()

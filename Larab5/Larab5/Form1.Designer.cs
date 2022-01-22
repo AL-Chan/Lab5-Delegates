@@ -33,6 +33,7 @@ namespace Larab5
             this.Mainframe = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.textlog = new System.Windows.Forms.RichTextBox();
+            this.ScoreCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Mainframe)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,17 +61,28 @@ namespace Larab5
             this.textlog.TabIndex = 1;
             this.textlog.Text = "";
             // 
+            // ScoreCount
+            // 
+            this.ScoreCount.AutoSize = true;
+            this.ScoreCount.Location = new System.Drawing.Point(489, 24);
+            this.ScoreCount.Name = "ScoreCount";
+            this.ScoreCount.Size = new System.Drawing.Size(35, 13);
+            this.ScoreCount.TabIndex = 2;
+            this.ScoreCount.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 491);
+            this.Controls.Add(this.ScoreCount);
             this.Controls.Add(this.textlog);
             this.Controls.Add(this.Mainframe);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.Mainframe)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -79,6 +91,7 @@ namespace Larab5
         private System.Windows.Forms.PictureBox Mainframe;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox textlog;
+        private System.Windows.Forms.Label ScoreCount;
     }
 }
 

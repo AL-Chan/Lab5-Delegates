@@ -18,10 +18,6 @@ namespace Larab5.Objects
         public Player(float x, float y) : base(x, y)
         {
         }
-        public void DrawIcon(System.Drawing.Icon icon, int x, int y)
-        {
-            Icon newIcon = new Icon("SampIcon.ico");
-        }
         
         public override void Render(Graphics g)
         {
@@ -46,6 +42,10 @@ namespace Larab5.Objects
             if (obj is Marker)
             {
                 onMarkerOverlap(obj as Marker);
+            }
+            if(obj is MyTarget)
+            {
+                OnTargetOverlap(obj as MyTarget);
             }
         }
     }
